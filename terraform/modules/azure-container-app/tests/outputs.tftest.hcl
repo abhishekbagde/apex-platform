@@ -1,13 +1,6 @@
 run "outputs_test" {
   module {
-    source = "."
-    application_name = "testapp"
-    environment      = "dev"
-    location         = "uksouth"
-    team             = "testteam"
-    cost_centre      = "CC-TEST"
-    container_image  = "testimage:latest"
-    log_analytics_workspace_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-test/providers/Microsoft.OperationalInsights/workspaces/law-test"
+    source = "./."
   }
 
   assert {
