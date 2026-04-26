@@ -137,7 +137,7 @@ jobs:
         run: dotnet restore golden-paths/dotnet-microservice/tests/ApexService.Tests/ApexService.Tests.csproj
 
       - name: Run xUnit tests
-        run: dotnet test golden-paths/dotnet-microservice/tests/ApexService.Tests/ApexService.Tests.csproj --logger trx --results-directory "${{ github.workspace }}/TestResults"
+        run: dotnet test apex-platform.sln --logger trx --results-directory "${{ github.workspace }}/TestResults"
 
       - name: Publish Test Results
         uses: actions/upload-artifact@v4
