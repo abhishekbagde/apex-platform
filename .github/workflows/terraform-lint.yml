@@ -54,8 +54,8 @@ jobs:
             echo "::group::Validating ${module_dir}"
             
             # Inject dummy provider to satisfy aliased provider requirements during standalone validation
-            echo 'provider "azurerm" { features {} }' > "${module_dir}/ci_dummy_provider.tf"
-            echo 'provider "azurerm" { alias = "hub"; features {} }' >> "${module_dir}/ci_dummy_provider.tf"
+            printf 'provider "azurerm" {\n  features {}\n}\n' > "${module_dir}/ci_dummy_provider.tf"
+            printf 'provider "azurerm" {\n  alias = "hub"\n  features {}\n}\n' >> "${module_dir}/ci_dummy_provider.tf"
             
             terraform -chdir="${module_dir}" init -backend=false -input=false -no-color
             terraform -chdir="${module_dir}" validate -no-color
