@@ -26,7 +26,7 @@ provider "azurerm" {
 # Hub provider alias — connectivity/hub subscription
 # In this basic example both aliases share the same subscription.
 provider "azurerm" {
-  alias   = "hub"
+  alias = "hub"
   features {}
   # subscription_id = "00000000-0000-0000-0000-000000000000"
 }

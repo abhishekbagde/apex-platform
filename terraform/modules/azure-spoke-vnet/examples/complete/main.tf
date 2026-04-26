@@ -34,7 +34,7 @@ provider "azurerm" {
 # The module uses this alias to create the hub-to-spoke peering inside
 # the hub resource group, which lives in a different subscription.
 provider "azurerm" {
-  alias           = "hub"
+  alias = "hub"
   features {}
   subscription_id = "00000000-0000-0000-0000-000000000000"
 }

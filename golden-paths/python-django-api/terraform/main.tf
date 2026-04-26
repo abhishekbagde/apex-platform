@@ -51,10 +51,10 @@ module "sql_database" {
   administrator_login          = "apexadmin"
   administrator_login_password = var.sql_admin_password
 
-  sku_name                = "GP_Gen5_2"
-  max_size_gb             = 32
-  backup_retention_days   = 35
-  geo_redundant_backup    = true
+  sku_name              = "GP_Gen5_2"
+  max_size_gb           = 32
+  backup_retention_days = 35
+  geo_redundant_backup  = true
 
   private_endpoint_subnet_id = var.private_endpoint_subnet_id
 

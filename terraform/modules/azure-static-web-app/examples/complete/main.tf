@@ -1,11 +1,16 @@
 terraform {
   required_version = ">= 1.5.0"
   required_providers {
-    azurerm = { source = "hashicorp/azurerm", version = "~> 3.80" }
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 3.80"
+    }
   }
 }
 
-provider "azurerm" { features {} }
+provider "azurerm" {
+  features {}
+}
 
 module "static_web_app" {
   source = "../../"

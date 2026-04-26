@@ -124,11 +124,11 @@ module "orders_api" {
 
   # Non-sensitive runtime configuration
   environment_variables = {
-    ASPNETCORE_ENVIRONMENT     = "Staging"
-    OTEL_SERVICE_NAME          = "orders-api"
+    ASPNETCORE_ENVIRONMENT      = "Staging"
+    OTEL_SERVICE_NAME           = "orders-api"
     OTEL_EXPORTER_OTLP_ENDPOINT = "https://otel-collector.internal:4317"
-    LOG_LEVEL                  = "Information"
-    FEATURE_FLAG_NEW_CHECKOUT  = "true"
+    LOG_LEVEL                   = "Information"
+    FEATURE_FLAG_NEW_CHECKOUT   = "true"
   }
 
   # Sensitive credentials — stored as Container App secrets and surfaced as

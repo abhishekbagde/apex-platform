@@ -123,11 +123,11 @@ resource "azurerm_role_assignment" "finops_cost_management" {
 
 # Custom Policy Definitions
 resource "azurerm_policy_definition" "require_mandatory_tags" {
-  name         = "require-mandatory-tags"
-  policy_type  = "Custom"
-  mode         = "Indexed"
-  display_name = "Require mandatory resource tags"
-  description  = "Denies resources missing the CostCentre, Team, or Environment tags."
+  name                = "require-mandatory-tags"
+  policy_type         = "Custom"
+  mode                = "Indexed"
+  display_name        = "Require mandatory resource tags"
+  description         = "Denies resources missing the CostCentre, Team, or Environment tags."
   management_group_id = azurerm_management_group.apex_platform.id
 
   metadata = jsonencode({
@@ -162,11 +162,11 @@ resource "azurerm_policy_definition" "require_mandatory_tags" {
 }
 
 resource "azurerm_policy_definition" "deny_public_storage" {
-  name         = "deny-public-storage"
-  policy_type  = "Custom"
-  mode         = "Indexed"
-  display_name = "Deny storage accounts with public network access"
-  description  = "Denies the creation of storage accounts that have public network access enabled."
+  name                = "deny-public-storage"
+  policy_type         = "Custom"
+  mode                = "Indexed"
+  display_name        = "Deny storage accounts with public network access"
+  description         = "Denies the creation of storage accounts that have public network access enabled."
   management_group_id = azurerm_management_group.apex_platform.id
 
   metadata = jsonencode({
@@ -209,8 +209,8 @@ resource "azurerm_management_group_policy_assignment" "require_tags" {
 }
 
 resource "azurerm_management_group_policy_assignment" "deny_public_ip" {
-  name                 = "deny-public-ip"
-  display_name         = "Deny creation of public IP addresses"
+  name         = "deny-public-ip"
+  display_name = "Deny creation of public IP addresses"
   # Built-in policy: Not allowed resource types (used to deny azurerm_public_ip)
   policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/9daedab3-fb2d-461e-b861-71790eead4f6"
   management_group_id  = azurerm_management_group.landing_zones.id
@@ -234,8 +234,8 @@ resource "azurerm_management_group_policy_assignment" "deny_public_storage" {
 }
 
 resource "azurerm_management_group_policy_assignment" "allowed_regions" {
-  name                 = "allowed-regions"
-  display_name         = "Restrict resources to allowed Azure regions"
+  name         = "allowed-regions"
+  display_name = "Restrict resources to allowed Azure regions"
   # Built-in: Allowed locations - policy definition ID
   policy_definition_id = "/providers/Microsoft.Authorization/policyDefinitions/e56962a6-4747-49cd-b67b-bf8b01975c4c"
   management_group_id  = azurerm_management_group.apex_platform.id
