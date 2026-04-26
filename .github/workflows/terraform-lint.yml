@@ -52,8 +52,24 @@ jobs:
 
           find terraform/modules -maxdepth 1 -mindepth 1 -type d | sort | while read -r module_dir; do
             echo "::group::Validating ${module_dir}"
+            
+            # Inject dummy provider to satisfy aliased provider requirements during standalone validation
+            cat <<EOF > "${module_dir}/ci_dummy_provider.tf"
+            provider "azurerm" {
+              features {}
+            }
+            provider "azurerm" {
+              alias = "hub"
+              features {}
+            }
+            EOF
+            
             terraform -chdir="${module_dir}" init -backend=false -input=false -no-color
             terraform -chdir="${module_dir}" validate -no-color
+            
+            # Clean up
+            rm "${module_dir}/ci_dummy_provider.tf"
+            
             echo "::endgroup::"
           done
 
