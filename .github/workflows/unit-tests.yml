@@ -118,3 +118,30 @@ jobs:
           VITE_AZURE_CLIENT_ID: "test-client-id"
           VITE_AZURE_TENANT_ID: "test-tenant-id"
         run: npm run test:coverage
+
+  # ─── .NET xUnit tests ──────────────────────────────────────────────────────
+  dotnet-tests:
+    name: .NET Unit Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x' # Use the same .NET version as in devcontainer.json
+
+      - name: Restore dependencies
+        run: dotnet restore golden-paths/dotnet-microservice/tests/ApexService.Tests/ApexService.Tests.csproj
+
+      - name: Run xUnit tests
+        run: dotnet test golden-paths/dotnet-microservice/tests/ApexService.Tests/ApexService.Tests.csproj --logger trx --results-directory "${{ github.workspace }}/TestResults"
+
+      - name: Publish Test Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-dotnet
+          path: ${{ github.workspace }}/TestResults
