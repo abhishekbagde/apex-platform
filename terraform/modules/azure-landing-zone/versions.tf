@@ -8,3 +8,8 @@ terraform {
     }
   }
 }
+
+provider "azurerm" {
+  alias = "hub"
+  features {}
+}
