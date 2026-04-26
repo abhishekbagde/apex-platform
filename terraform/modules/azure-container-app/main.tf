@@ -32,6 +32,8 @@ resource "azurerm_container_app_environment" "this" {
 
 locals {
   effective_cae_id = var.container_app_environment_id != null ? var.container_app_environment_id : azurerm_container_app_environment.this[0].id
+
+  secrets_list = [for k, v in var.secrets : { name = k, value = v }]
 }
 
 resource "azurerm_container_app" "this" {
@@ -54,10 +56,10 @@ resource "azurerm_container_app" "this" {
   }
 
   dynamic "secret" {
-    for_each = var.secrets
+    for_each = local.secrets_list
     content {
-      name  = secret.key
-      value = secret.value
+      name  = secret.value.name
+      value = secret.value.value
     }
   }
 
@@ -80,10 +82,10 @@ resource "azurerm_container_app" "this" {
       }
 
       dynamic "env" {
-        for_each = var.secrets
+        for_each = local.secrets_list
         content {
-          name        = upper(replace(env.key, "-", "_"))
-          secret_name = env.key
+          name        = upper(replace(env.value.name, "-", "_"))
+          secret_name = env.value.name
         }
       }
 
@@ -125,7 +127,4 @@ resource "azurerm_monitor_diagnostic_setting" "this" {
     category = "ContainerAppSystemLogs"
   }
 
-  metric {
-    category = "AllMetrics"
-  }
 }
