@@ -1,12 +1,12 @@
 locals {
   region_short = {
-    "uksouth"    = "uks"
-    "ukwest"     = "ukw"
-    "westeurope" = "weu"
+    "uksouth"     = "uks"
+    "ukwest"      = "ukw"
+    "westeurope"  = "weu"
     "northeurope" = "neu"
-    "eastus"     = "eus"
-    "eastus2"    = "eus2"
-    "westus2"    = "wus2"
+    "eastus"      = "eus"
+    "eastus2"     = "eus2"
+    "westus2"     = "wus2"
   }
   region_short_code    = lookup(local.region_short, var.location, "uks")
   resource_group_name  = "rg-rot-${var.application_name}-${var.environment}-${local.region_short_code}"

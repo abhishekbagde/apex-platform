@@ -29,8 +29,8 @@ module "static_web_app" {
   custom_domain_name = var.custom_domain_name
 
   tags = {
-    Team        = "platform-engineering"
-    CostCentre  = "PLATFORM-001"
+    Team       = "platform-engineering"
+    CostCentre = "PLATFORM-001"
   }
 }
 

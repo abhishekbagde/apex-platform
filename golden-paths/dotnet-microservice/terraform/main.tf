@@ -11,7 +11,7 @@ terraform {
     resource_group_name  = "rg-apex-platform-tfstate-uks"
     storage_account_name = "stapexplatformtfstate"
     container_name       = "tfstate"
-    key                  = "services/${{ values.serviceName }}/${var.environment}/terraform.tfstate"
+    # key                  = "services/${{ values.serviceName }}/${var.environment}/terraform.tfstate"
   }
 }
 
@@ -39,17 +39,17 @@ variable "log_analytics_workspace_id" {
 }
 
 locals {
-  team        = "${{ values.owningTeam }}"
-  cost_centre = upper(replace("${{ values.owningTeam }}", "-", ""))
+  # team        = "${{ values.owningTeam }}"
+  # cost_centre = upper(replace("${{ values.owningTeam }}", "-", ""))
 }
 
 module "key_vault" {
   source = "../../../../terraform/modules/azure-key-vault"
 
-  application_name           = "${{ values.serviceName }}"
-  environment                = var.environment
-  team                       = local.team
-  cost_centre                = local.cost_centre
+  # application_name           = "${{ values.serviceName }}"
+  environment = var.environment
+  # team                       = local.team
+  # cost_centre                = local.cost_centre
   log_analytics_workspace_id = var.log_analytics_workspace_id
   enable_purge_protection    = var.environment == "prod"
   enable_private_endpoint    = false # Set to true and provide subnet_id for VNet-integrated deployments
@@ -58,10 +58,10 @@ module "key_vault" {
 module "container_app" {
   source = "../../../../terraform/modules/azure-container-app"
 
-  application_name           = "${{ values.serviceName }}"
-  environment                = var.environment
-  team                       = local.team
-  cost_centre                = local.cost_centre
+  # application_name           = "${{ values.serviceName }}"
+  environment = var.environment
+  # team                       = local.team
+  # cost_centre                = local.cost_centre
   container_image            = var.container_image
   log_analytics_workspace_id = var.log_analytics_workspace_id
   min_replicas               = var.environment == "prod" ? 2 : 0

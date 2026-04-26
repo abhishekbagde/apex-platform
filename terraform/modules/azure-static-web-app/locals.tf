@@ -9,11 +9,11 @@ locals {
     "westus2"     = "wus2"
   }
 
-  region_short_code  = lookup(local.region_short, var.location, "weu")
-  instance_padded    = format("%02d", var.instance_number)
-  name_suffix        = "${var.application_name}-${var.environment}-${local.region_short_code}-${local.instance_padded}"
+  region_short_code   = lookup(local.region_short, var.location, "weu")
+  instance_padded     = format("%02d", var.instance_number)
+  name_suffix         = "${var.application_name}-${var.environment}-${local.region_short_code}-${local.instance_padded}"
   resource_group_name = "rg-${local.name_suffix}"
-  static_site_name   = "stapp-${local.name_suffix}"
+  static_site_name    = "stapp-${local.name_suffix}"
 
   default_tags = {
     ApplicationName = var.application_name

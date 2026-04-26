@@ -20,7 +20,7 @@ module "sql_database" {
   team                       = "orders-team"
   cost_centre                = "CC-001"
   admin_login                = "sqladmin"
-  admin_password             = "P@ssw0rd1234!"  # In production, use Key Vault
+  admin_password             = "P@ssw0rd1234!" # In production, use Key Vault
   log_analytics_workspace_id = "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-example/providers/Microsoft.OperationalInsights/workspaces/log-example"
   enable_private_endpoint    = false
   backup_retention_days      = 7
